@@ -2,3 +2,4 @@
 _commit: 1cfce4b
 _src_path: https://github.com/ansible/platform-service-framework
 template: templates/project
+project_name: platform_service_example
