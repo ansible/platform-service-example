@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: 1cfce4b
+_commit: 8c51004
 _src_path: https://github.com/ansible/platform-service-framework.git
-template: templates/project
 project_name: platform_service_example
+template: templates/project
