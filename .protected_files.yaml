@@ -3,7 +3,7 @@
 # in repositories using the template
 
 protected_files:
-  - {{project_name}}/
+  - platform_service_example/
   - .github/workflows/framework-validation.yml
   - manage.py
   - sonar-project.properties
