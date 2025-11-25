@@ -1,0 +1,17 @@
+---
+name: Framework Validation
+on:
+  pull_request:
+  push:
+    branches:
+      - devel
+      - main
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Validate framework
+        run: |
+          uvx --refresh git+https://github.com/ansible/platform-service-framework validate
