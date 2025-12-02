@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Prints Hello"
+    help = "Prints Hello from API"
 
     def handle(self, *args, **options):
-        self.stdout.write(f"Hello {settings.FOO}")
+        self.stdout.write(f"Hello from API - Loaded apps: {settings.LOADED_APPS}")
