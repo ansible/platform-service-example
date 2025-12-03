@@ -16,6 +16,6 @@ class TestService(TestCase):
         self.assertEqual(settings.FOO, "new value")
 
     def test_url_loading(self):
-        expected = "/api/nothing"
+        expected = "/api/v1/nothing/"
         reversed = reverse("api:nothing")
         self.assertEqual(reversed, expected)

@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
 ]
 """List of installed apps"""
 
@@ -92,6 +93,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # DAB middlewares
+    "crum.CurrentRequestUserMiddleware",
+    "ansible_base.lib.middleware.logging.LogRequestMiddleware",
+    "ansible_base.lib.middleware.logging.LogTracebackMiddleware",
 ]
 """List of middleware classes"""
 
@@ -173,8 +178,6 @@ default_variables = {k: v for k, v in locals().items() if k.isupper()}
 
 ## --- End Default Settings | Start Dynaconf instrumentation --- #
 
-# TODO(rochacbruno): Add Validators
-# TODO(rochacbruno): Read local development files
 app_prefix = "EXAMPLE"
 """Application prefix for environment variables filtering."""
 
@@ -206,6 +209,10 @@ if apps_dir.exists():
         DYNACONF.load_file(f"{app}.settings", run_hooks=False)
     DYNACONF.set("LOADED_APPS", all_apps)
 
+
+# load local dev settings if exists
+if (dev_file := Path(BASE_DIR / "settings.local.py")).exists():
+    DYNACONF.load_file(dev_file)
 
 # DAB default and DAB conditionals that needs to load after project and app settings.
 load_dab_settings(DYNACONF)

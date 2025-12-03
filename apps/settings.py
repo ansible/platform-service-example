@@ -13,7 +13,35 @@ each app own settings.py, environment local override files and
 environment variables.
 """
 
+extra_applications = []
+"""Extra applications added after PSF templating."""
+
+dab_applications = [
+    "ansible_base.rest_filters",
+    "ansible_base.jwt_consumer",
+    "ansible_base.resource_registry",
+    "ansible_base.rbac",
+    "ansible_base.feature_flags",
+    "ansible_base.api_documentation",
+]
+"""Default DAB applications layd out from PSF, add/remove according to the project needs,
+adjust `pyproject` dab extra dependencies acording to apps added/removed here.
+"""
+
+project_applications = ["apps.api"]
+"""List of applications from the apps/ folder."""
+
+
 INSTALLED_APPS = [
     "dynaconf_merge_unique",  # DO NOT REMOVE THIS
-    "apps.api",
+    *dab_applications,
+    *project_applications,
+    *extra_applications,
 ]
+"""Final state of the INSTALLED_APPS that will merge with the rest of the settings."""
+
+# TODO (rochacbruno): Add the rest of DAB settings here:
+# resource registry registration
+# RBAC models
+# DRF and Auth classes
+# All pointing to the api app.

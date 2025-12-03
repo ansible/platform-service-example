@@ -14,12 +14,24 @@ This file is managed by the Ansible Services Framework
 
 import importlib
 
+from ansible_base.lib.dynamic_config.dynamic_urls import (
+    api_urls,  # type: ignore
+    api_version_urls,  # type: ignore
+    root_urls,  # type: ignore
+)
+from ansible_base.rbac.service_api.urls import rbac_service_urls
+from ansible_base.resource_registry.urls import urlpatterns as resource_api_urls
 from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import include, path
 
-urlpatterns = []
-
-# TODO (rochacbruno):  Load DAB URLs dynamically here.
+urlpatterns = [
+    path("api/v1/", include(api_version_urls)),
+    path("api/v1/", include(resource_api_urls)),
+    path("api/v1/", include(rbac_service_urls)),
+    path("api/", include(api_urls)),
+    path("", include(root_urls)),
+]
 
 # Extend URL patterns for each app
 for app in settings.LOADED_APPS:
@@ -34,3 +46,11 @@ if not settings.DYNACONF.get("IS_RUNNING_TESTS") and settings.DYNACONF.get("DEBU
     from debug_toolbar.toolbar import debug_toolbar_urls  # noqa
 
     urlpatterns.extend(debug_toolbar_urls())
+
+# Static URL required to serve DRF Browsable API
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# TODO (rochacbruno): Add a, /api/ root view generated from the routers
+# see: https://github.com/ansible/django-ansible-base/blob/46d2c46aadb325d923627f5139025952fc969d9b/test_app/views.py#L142-L181
+# The view will be defined inside platform_service_example and managed by framework.
