@@ -3,6 +3,7 @@ _commit: 392c526
 _src_path: https://github.com/ansible/platform-service-framework.git
 app_name: ''
 apps:
+- core
 - api
 project_name: platform_service_example
 src_branch: main
