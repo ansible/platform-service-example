@@ -1,6 +1,9 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: 76c73a7
+_commit: 392c526
 _src_path: https://github.com/ansible/platform-service-framework.git
+app_name: ''
+apps:
+- api
 project_name: platform_service_example
 src_branch: main
 template: templates/project
