@@ -31,16 +31,17 @@ urlpatterns = []
 
 # Django Ansible Base URLs
 urlpatterns += [
-    path('v1/', include(api_version_urls)),
-    path('v1/', include(resource_api_urls)),
-    path('v1/', include(rbac_service_urls)),
-    path('', include(root_urls)),
-    path('', include(api_urls)),
+    path("v1/", include(api_version_urls)),
+    path("v1/", include(resource_api_urls)),
+    path("v1/", include(rbac_service_urls)),
+    path("", include(root_urls)),
+    path("", include(api_urls)),
 ]
 
 # Override empty router views from DAB with dynamic API root
 urlpatterns += [
-    path('v1/', APIRootView.as_view(), name='v1-index'),
+    path("v1/", APIRootView.as_view(), name="v1-index"),
+    path("", APIRootView.as_view(), name="index"),
 ]
 
 # Extend URL patterns for each app
@@ -49,11 +50,7 @@ for app in settings.LOADED_APPS:
     url_module_path = f"{app}.urls"
     urls = importlib.import_module(url_module_path)
     if patterns := getattr(urls, "urlpatterns", None):
-        # Core app URLs are registered at root level (ping, health, etc.)
-        if app_name == "core":
-            urlpatterns.append(path("", include(url_module_path)))
-        else:
-            urlpatterns.append(path(f"{app_name}/", include(url_module_path)))
+        urlpatterns.append(path("", include(url_module_path)))
 
 # Debug and Development URLS
 if not settings.DYNACONF.get("IS_RUNNING_TESTS") and settings.DYNACONF.get("DEBUG"):
