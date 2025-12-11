@@ -7,4 +7,3 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write(f"Hello from api - Loaded apps: {settings.LOADED_APPS}")
- 
