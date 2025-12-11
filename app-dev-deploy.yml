@@ -8,22 +8,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: platform_service_example
+  name: platform-service-example
   labels:
-    app: platform_service_example
+    app: platform-service-example
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platform_service_example
+      app: platform-service-example
   template:
     metadata:
       labels:
-        app: platform_service_example
+        app: platform-service-example
     spec:
       containers:
-        - name: platform_service_example
-          image: localhost:5001/platform_service_example:latest
+        - name: platform-service-example
+          image: localhost:5001/platform-service-example:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -56,10 +56,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: platform_service_example
+  name: platform-service-example
 spec:
   selector:
-    app: platform_service_example
+    app: platform-service-example
   ports:
     - protocol: TCP
       port: 80

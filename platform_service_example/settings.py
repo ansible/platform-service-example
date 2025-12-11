@@ -108,7 +108,7 @@ ROOT_URLCONF = "platform_service_example.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["apps/core/templates", "apps/api/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

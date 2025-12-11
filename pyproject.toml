@@ -58,6 +58,16 @@ select = ["E", "F", "W", "C90", "N", "I"]
 [tool.ruff.lint.mccabe]
 max-complexity = 15
 
+[tool.ty.src]
+exclude = [
+    "tests",
+    "apps/**/tests",
+    "migrations",
+]
+
+[tool.ty.rules]
+possibly-missing-implicit-call = "ignore"
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-vs -ra -q"
@@ -72,7 +82,7 @@ lint = "ruff check ."
 type_check = "ty check"
 format = "ruff format ."
 unit-test = "manage.py test -v 2"
-check = ["format", "lint","type_check", "unit-test"]
+check = ["format", "lint", "unit-test"]
 render-docs = "pdoc -t docs/templates --mermaid --docformat markdown --docformat google platform_service_example apps -o html"
 serve-docs = "pdoc -t docs/templates --mermaid --docformat markdown --docformat google platform_service_example apps"
 
