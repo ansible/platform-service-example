@@ -44,7 +44,7 @@ class APIRootView(APIView):
                 continue
 
             # Get the path relative to our prefix
-            relative_path = clean_path[len(prefix):]
+            relative_path = clean_path[len(prefix) :]
 
             # Skip empty relative path (this is the index itself)
             if not relative_path or relative_path == "/":
