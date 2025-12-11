@@ -6,5 +6,5 @@ apps:
 - core
 - api
 project_name: platform_service_example
-src_branch: main
+src_branch: feat/check-ci
 template: templates/project
