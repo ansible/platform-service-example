@@ -1,11 +1,11 @@
+from ansible_base.lib.utils.views.ansible_base import AnsibleBaseView
 from django.contrib.admindocs.views import simplify_regex
 from django.urls import URLPattern, URLResolver, get_resolver
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 
-class APIRootView(APIView):
+class APIRootView(AnsibleBaseView):
     """
     Dynamically discovers and lists available API endpoints.
 
@@ -15,12 +15,19 @@ class APIRootView(APIView):
     matching pattern wins (like `show_urls --unsorted`).
 
     Usage:
-        path('v1/', APIRootView.as_view(), name='v1-root'),
-        path('', APIRootView.as_view(), name='index'),
+        path('v1/', APIRootView.as_view(view_name='v1'), name='v1-root'),
+        path('', APIRootView.as_view(view_name='my_project'), name='index'),
     """
 
     permission_classes = [AllowAny]
-    authentication_classes = []
+    view_name = None  # Set via as_view(view_name="...")
+
+    def get_view_name(self):
+        """Return the view name for breadcrumbs."""
+        if self.view_name:
+            return self.view_name
+        # Fallback to default
+        return "API Root"
 
     def get(self, request):
         resolver = get_resolver()
