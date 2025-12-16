@@ -6,5 +6,5 @@ apps:
 - core
 - api
 project_name: platform_service_example
-src_branch: 1e47ae3edd33fe332e1a0ae80366c59b6dd08d7c
+src_branch: a1e4458db4ce42b8721e93b90263f0342ccc3fa0
 template: templates/project
