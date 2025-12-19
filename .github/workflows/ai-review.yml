@@ -19,4 +19,4 @@ jobs:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          cursor-agent -p "Review this PR and post comments on issues found"
+          cursor-agent -p "Review this PR and post comments on issues found. Make sure to go ONLY through the files that are changed in the PR."
