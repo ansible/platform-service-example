@@ -12,6 +12,8 @@ ENV PYTHONUNBUFFERED=1
 ENV UV_LINK_MODE=copy
 ENV UV_NO_CACHE=1
 
+BREAK_CONTAINERFILE
+
 WORKDIR /app
 
 # Install git (required for django-ansible-base from git)
